@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestfController
+@RestController
 class EmployeeController {
 
   private final EmployeeRepository repository;
@@ -31,7 +31,7 @@ class EmployeeController {
   @GetMapping("/employees/{id}")
   Employee one(@PathVariable Long id) {
     return repository.findById(id)
-      .orEleseThrow(() -> new EmployeeNotFoundException(id));
+      .orElseThrow(() -> new EmployeeNotFoundException(id));
   }
 
   @PutMapping("/employees/{id}")
@@ -42,7 +42,7 @@ class EmployeeController {
         employee.setRole(newEmployee.getRole());
         return repository.save(employee);
       })
-      .orEleseGet(() -> {
+      .orElseGet(() -> {
         newEmployee.setId(id);
         return repository.save(newEmployee);
       });
