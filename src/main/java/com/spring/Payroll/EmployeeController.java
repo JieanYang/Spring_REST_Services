@@ -26,6 +26,11 @@ class EmployeeController {
     return repository.findAll();
   }
   // end::get-aggregate-root[]
+  
+  @PostMapping("/employees")
+  Employee newEmployee(@RequestBody Employee newEmployee) {
+    return repository.save(newEmployee);
+  }
 
   // Single item
   @GetMapping("/employees/{id}")
