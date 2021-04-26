@@ -35,7 +35,7 @@ class Employee {
     return this.id;
   }
 
-  public Stirng getFirstName() {
+  public String getFirstName() {
     return this.firstName;
   }
 
