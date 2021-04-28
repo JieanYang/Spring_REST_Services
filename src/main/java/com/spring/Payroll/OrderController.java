@@ -7,7 +7,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpHeaders;
 
-import org.springframework.beans.factory.parsing.Problem;
+
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.mediatype.problem.Problem;
 
 @RestController
 class OrderController {
