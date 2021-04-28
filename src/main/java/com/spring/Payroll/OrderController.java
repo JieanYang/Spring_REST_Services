@@ -1,9 +1,13 @@
 package payroll;
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
+
+import org.springframework.beans.factory.parsing.Problem;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +20,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.MediaTypes;
 
 @RestController
 class OrderController {
@@ -34,7 +39,7 @@ class OrderController {
       .map(assembler::toModel)
       .collect(Collectors.toList());
 
-    return ColectionModel.of(orders, linkTo(methodOn(OrderController.class).all()).withSelfRel());
+    return CollectionModel.of(orders, linkTo(methodOn(OrderController.class).all()).withSelfRel());
   }
 
   @GetMapping("/orders/{id}")
@@ -74,7 +79,7 @@ class OrderController {
       .status(HttpStatus.METHOD_NOT_ALLOWED)
       .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
       .body(
-        problem.create()
+        Problem.create()
         .withTitle("Method not allowed")
         .withDetail("You can't complete an order that is in the " + order.getStatus() + " status")
       );
@@ -97,7 +102,7 @@ class OrderController {
       .status(HttpStatus.METHOD_NOT_ALLOWED)
       .header(HttpHeaders.CONTENT_TYPE, MediaTypes.HTTP_PROBLEM_DETAILS_JSON_VALUE)
       .body(
-        Problem.created()
+        Problem.create()
         .withTitle("Me6thod not allowed")
         .withDetail("You can't cancel an order that is in the " + order.getStatus() + " status")
       );
